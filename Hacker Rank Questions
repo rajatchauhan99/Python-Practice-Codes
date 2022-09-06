@@ -1,0 +1,99 @@
+1. Code to find if a year is a leap year:
+
+      def is_leap(year):
+          leap = False
+
+          if year%4 == 0 and year%100 != 0:
+              leap = True
+          elif year%400 == 0:
+              leap = True
+          return leap
+
+      year = int(input())
+      print(is_leap(year))
+
+
+2. To print in the same line without space
+
+
+      if __name__ == '__main__':
+          n = int(input())
+
+      i = 1
+      while i <= n:
+          print(i,end ='')
+          i = i + 1
+
+      This prints all numbers upto the number n    
+
+      Note: end = "\n" is the default which shifts the print command to the next line
+
+3. Defining a class
+
+      Classes are used to define our own datatypes.  (Defining the attributes of the particular object as per our need)
+      So using that class we can create an actual object.
+
+      Syntax of making a class:
+
+      class student:
+          def __init__(self,name,age):
+              self.name = name
+              self.age = age
+
+      Then using the class formed we can create an actual object which will have the attribute name and age.
+
+      example:
+
+      student1 = student('Rajat',27)
+
+      Then we can create class functions in python, that is the functions inside the class which 
+      we can call to do some operations after taking the input from the user.
+      
+      
+ 4. Code to find out angle between two planes, formed by 4 points
+ 
+        Note: The input here is 4 vector points in 3D space, that is having x, y and z coordinate axis
+
+
+       import math
+
+      class Points(object):
+          def __init__(self, x, y, z):
+              self.x = x
+              self.y = y
+              self.z = z
+
+          def __sub__(self, no):                                   # a class function to subtract two vectors
+              x = self.x - no.x
+              y = self.y - no.y
+              z = self.z - no.z
+              return Points(x, y, z)
+
+          def dot(self, no):                                     # a class function to do dot product of two vectors
+              x = self.x * no.x
+              y = self.y * no.y
+              z = self.z * no.z
+              return x + y + z
+
+          def cross(self, no):                                        # to do cross product
+              x = self.y * no.z - self.z * no.y
+              y = self.z * no.x - self.x * no.z
+              z = self.x * no.y - self.y * no.x
+              return Points(x, y, z)
+
+          def absolute(self):                                               # to find out magnitude of a vector
+              return pow((self.x ** 2 + self.y ** 2 + self.z ** 2), 0.5)
+
+
+          if __name__ == '__main__':
+              points = list()
+              for i in range(4):
+                  a = list(map(float, input().split()))
+                  points.append(a)
+
+              a, b, c, d = Points(*points[0]), Points(*points[1]), Points(*points[2]), Points(*points[3])
+              x = (b - a).cross(c - b)
+              y = (c - b).cross(d - c)
+              angle = math.acos(x.dot(y) / (x.absolute() * y.absolute()))
+
+              print("%.2f" % math.degrees(angle))
